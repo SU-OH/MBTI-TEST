@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MBTI 테스트 결과 - <%= result %></title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="result-content">
+      <h1 class="result-title">당신의 MBTI는</h1>
+      <div class="result-type"><%= result %></div>
+      
+      <div class="result-box">
+        <div class="result-description">
+          <%= description %>
+        </div>
+        
+        <div class="result-img">
+          <img src="/images/<%= result %>.png" alt="<%= result %> 이미지" onerror="this.src='/images/default-result.png'">
+        </div>
+      </div>
+      
+      <div class="result-explanation">
+        <h3>각 알파벳이 의미하는 것은?</h3>
+        <div class="explanation-grid">
+          <div class="explanation-item">
+            <span class="highlight">E</span>xtroversion (외향형) vs <span class="highlight">I</span>ntroversion (내향형)
+            <p>에너지를 얻는 방향: 외부 세계 vs 내면 세계</p>
+          </div>
+          <div class="explanation-item">
+            <span class="highlight">S</span>ensing (감각형) vs i<span class="highlight">N</span>tuition (직관형)
+            <p>정보를 인식하는 방식: 실제적 경험 vs 패턴과 가능성</p>
+          </div>
+          <div class="explanation-item">
+            <span class="highlight">T</span>hinking (사고형) vs <span class="highlight">F</span>eeling (감정형)
+            <p>판단의 기준: 논리와 원칙 vs 가치와 정서</p>
+          </div>
+          <div class="explanation-item">
+            <span class="highlight">J</span>udging (판단형) vs <span class="highlight">P</span>erceiving (인식형)
+            <p>생활 방식: 계획적, 체계적 vs 유연하고 적응적</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="btn-container">
+        <a href="/test" class="retry-btn">다시 테스트하기</a>
+        <a href="/" class="home-btn">홈으로</a>
+        <button class="share-btn" onclick="shareResult()">결과 공유하기</button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function shareResult() {
+      const result = "<%= result %>";
+      const text = `나의 MBTI 유형은 ${result}입니다! 당신의 MBTI는 무엇인가요? - 나만의 MBTI 테스트`;
+      const url = window.location.href;
+      
+      if (navigator.share) {
+        navigator.share({
+          title: '나만의 MBTI 테스트 결과',
+          text: text,
+          url: url
+        })
+        .catch(error => console.log('공유하기 실패:', error));
+      } else {
+        // 클립보드에 복사
+        const tempInput = document.createElement('input');
+        document.body.appendChild(tempInput);
+        tempInput.value = `${text}\n${url}`;
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+        
+        alert('클립보드에 공유 텍스트가 복사되었습니다!');
+      }
+    }
+  </script>
+</body>
+</html> 
