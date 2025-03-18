@@ -15,7 +15,8 @@
           <span><%= currentQuestion %> / <%= totalQuestions %></span>
         </div>
         <div class="progress-bar">
-          <div class="progress" style="width: <%= (currentQuestion / totalQuestions) * 100 %>%"></div>
+          <% const progressWidth = (currentQuestion / totalQuestions) * 100; %>
+          <div class="progress" style="width: <%= progressWidth %>%;"></div>
         </div>
       </div>
       
