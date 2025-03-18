@@ -34,6 +34,8 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
   position: relative;
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 /* 애니메이션 입장 효과 */
@@ -76,107 +78,6 @@ body {
 
 @keyframes fadeIn {
   to { opacity: 1; }
-}
-
-/* 배경 떠다니는 요소들 */
-.floating-letters {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-/* 글자 스타일 */
-.letter {
-  position: absolute;
-  left: calc(var(--x) * 1%);
-  top: calc(var(--y) * 1%);
-  color: var(--c);
-  font-size: calc(1rem + 1vw);
-  font-weight: bold;
-  opacity: 0.15;
-  animation: float 15s infinite ease-in-out;
-  animation-delay: calc(var(--i) * -2s);
-}
-
-/* 원 스타일 */
-.circle {
-  position: absolute;
-  left: calc(var(--x) * 1%);
-  top: calc(var(--y) * 1%);
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: var(--c);
-  opacity: 0.1;
-  animation: float 20s infinite ease-in-out;
-  animation-delay: calc(var(--i) * -1.5s);
-}
-
-/* 사각형 스타일 */
-.square {
-  position: absolute;
-  left: calc(var(--x) * 1%);
-  top: calc(var(--y) * 1%);
-  width: 25px;
-  height: 25px;
-  background-color: var(--c);
-  opacity: 0.1;
-  animation: rotate 25s infinite linear;
-  animation-delay: calc(var(--i) * -1.2s);
-}
-
-/* 삼각형 스타일 */
-.triangle {
-  position: absolute;
-  left: calc(var(--x) * 1%);
-  top: calc(var(--y) * 1%);
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-bottom: 25px solid var(--c);
-  opacity: 0.1;
-  animation: rotateReverse 30s infinite linear;
-  animation-delay: calc(var(--i) * -1.8s);
-}
-
-/* 애니메이션 효과들 */
-@keyframes float {
-  0%, 100% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-  25% {
-    transform: translate(10px, -15px) rotate(5deg);
-  }
-  50% {
-    transform: translate(-5px, 10px) rotate(-5deg);
-  }
-  75% {
-    transform: translate(-10px, -10px) rotate(3deg);
-  }
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg) translate(5px) rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg) translate(5px) rotate(-360deg);
-  }
-}
-
-@keyframes rotateReverse {
-  from {
-    transform: rotate(0deg) translate(-5px) rotate(0deg);
-  }
-  to {
-    transform: rotate(-360deg) translate(-5px) rotate(360deg);
-  }
 }
 
 /* 버튼 펄스 효과 */
@@ -508,10 +409,6 @@ body {
   .explanation-grid {
     grid-template-columns: 1fr;
   }
-  
-  .circle, .square, .triangle {
-    opacity: 0.05;
-  }
 }
 
 @media (max-width: 480px) {
@@ -536,9 +433,5 @@ body {
     padding: 10px 20px;
     font-size: 0.9rem;
     margin-bottom: 10px;
-  }
-  
-  .floating-letters {
-    display: none;
   }
 } 
